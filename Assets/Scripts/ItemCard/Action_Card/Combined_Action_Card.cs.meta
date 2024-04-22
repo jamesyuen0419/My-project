@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: cd30d94e3013e8343b47335cdb6c77a1
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - concept: {instanceID: 0}
+  - cardPrefab: {fileID: 5899276076669643028, guid: 1e897afbeda94a44e80e75cff1bc6279, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

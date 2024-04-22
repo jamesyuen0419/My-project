@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Canvas
+  - concept_dropdown
+  - combined_product
+  - main_slot
+  - support_slot
+  - event_system
+  - forge_panel
+  - concept_adjust_list
+  - input_field_forge
+  - input_type_forge
+  - concept_adjust_list_2
+  - support_concept_list
+  - UI_Manager
+  - forge_concept_system
+  - submit_system
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: icon
+    uniqueID: 2330755427
+    locked: 0
