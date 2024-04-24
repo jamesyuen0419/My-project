@@ -25,7 +25,7 @@ public class Range_Info : Concept_Info
             return false;
         }
         //Type check
-        if (GetType() != obj.GetType()) {
+        if (GetType() != obj.GetType() && obj.GetType() != typeof(RangeVar_Info)) {
             return false;
         }
         //Checking cross concept equal with range variable version
@@ -33,9 +33,11 @@ public class Range_Info : Concept_Info
             Variable_Info interval_test = null;
             //Checking float and integer version
             if (interval - Mathf.FloorToInt(interval) > 0) {
+                Debug.Log("1");
                 interval_test = new Variable_Info("Float", interval.ToString());
             }
             else {
+                Debug.Log("2");
                 interval_test = new Variable_Info("Integer", interval.ToString());
             }
             RangeVar_Info test = new RangeVar_Info(new Variable_Info("Integer", start.ToString()),new Variable_Info("Integer", end.ToString()), interval_test);

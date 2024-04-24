@@ -9,35 +9,27 @@ using System.Linq;
 
 public class Submit_System : MonoBehaviour, IDropHandler
 {
-    public UI_Manager ui_script;
-    public GameObject end_panel;
-    public GameObject item_sample;
+    public UI_Manager ui_script;  //manager script
+    public GameObject end_panel;  //prefab of end game panel
+    public GameObject item_sample;  //prefab of item in show panel
 
-    public GameObject left_button;
-    public GameObject right_button;
-    public GameObject clear_button;
-    public GameObject submit_button;
-    public GameObject current_object;
-    public GameObject show_panel;
+    public GameObject current_object;  //current character name display
+    public GameObject show_panel;  //show panel content
 
-    public List<Sprite> object_sprite_list;
-    public List<List<(int, string)>> object_name_list;
+    public List<Sprite> object_sprite_list;  //character sprite list
+    public List<List<(int, string)>> object_name_list;  //character sprite number and name list
     public Sprite concept_block_sprite;
-    public Sprite action_card_sprite;
-    public int current_object_num;
-    public int current_sub_task_num;
+    public int current_object_num;  //current character number
+    public int current_sub_task_num;  //current subtask number
 
-    public List<List<Concept_Info>> submitted_concept_info;
-    private List<List<List<Concept_Info>>> answer;
-    private List<int> correct_concept_num;
-    private bool checked_flag;
+    public List<List<Concept_Info>> submitted_concept_info;  //submitted concept list
+    private List<List<List<Concept_Info>>> answer;  //answer list
+    private List<int> correct_concept_num;  //correct answer list
+    private bool checked_flag;  //whether concept is checked
 
+    //Initialize the setting
     void Start()
     {
-        left_button = gameObject.transform.Find("Left_Button").gameObject;
-        right_button = gameObject.transform.Find("Right_Button").gameObject;
-        clear_button = gameObject.transform.Find("Clear_Button").gameObject;
-        submit_button = gameObject.transform.Find("Submit_Button").gameObject;
         show_panel = transform.Find("Concept_Panel").Find("Scroll View").Find("Viewport").Find("Content").gameObject;
         ui_script = GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>();
 
@@ -56,6 +48,7 @@ public class Submit_System : MonoBehaviour, IDropHandler
         UpdateConceptPanel();
     }
 
+    //Control to the previous character
     public void LeftButtonEvent() {
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(3);
         if (current_object_num > 0) {
@@ -66,6 +59,7 @@ public class Submit_System : MonoBehaviour, IDropHandler
         }
     }
 
+    //Control to the next character
     public void RightButtonEvent() {
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(3);
         if (current_object_num < object_name_list[current_sub_task_num].Count - 1) {
@@ -76,6 +70,7 @@ public class Submit_System : MonoBehaviour, IDropHandler
         }
     }
 
+    //Clear current character submitted concept
     public void ClearButtonEvent() {
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(0);
         transform.Find("Concept_Panel").Find("Text").GetComponent<TMP_Text>().color = Color.white;
@@ -84,30 +79,38 @@ public class Submit_System : MonoBehaviour, IDropHandler
         UpdateConceptPanel();
     }
 
+    //Submit and check process
     public void SubmitButtonEvent() {
-        Boolean submit_state = Check();
+        bool submit_state = Check();
+
         if (submit_state) {
+            //task completed
             if (ui_script.GetSubTaskTotal() - 1 == ui_script.GetSubTaskNum()) {
                 GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(4);
                 GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(1);
                 ui_script.SetPlayerStatus();
                 ui_script.Blur_Screen();
+                //call end panel and edit message
                 GameObject panel = Instantiate(end_panel, GameObject.FindGameObjectWithTag("Canvas").transform);
                 Vector3 center = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, 0));
                 panel.transform.position = new Vector3(center.x,center.y,0);
-                String message = "Task " + ui_script.GetTask().ToString() + " Completed!";
+                string message = "Task " + ui_script.GetTask().ToString() + " Completed!";
                 panel.transform.Find("Text").GetComponent<TMP_Text>().SetText(message);
             }
             else {
                 GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(0);
                 GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(1);
+                //update current subtask
                 ui_script.SetSubTaskNum();
                 current_sub_task_num = ui_script.GetSubTaskNum();
                 current_object_num = 0;
+                //clear submitted concept
                 for (int i = 0; i < submitted_concept_info.Count; i++) {
                     submitted_concept_info[i].Clear();
                 }
+                //update submitted concept to manager
                 ui_script.AddCurrentAnswer(submitted_concept_info);
+                //update show panel
                 UpdateConceptPanel();
                 transform.Find("Concept_Panel").Find("Text").GetComponent<TMP_Text>().color = Color.white;
             }
@@ -116,6 +119,7 @@ public class Submit_System : MonoBehaviour, IDropHandler
             GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(0);
             GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(2);
             UpdateConceptPanel();
+            //if answer is not correct, perform notification on the show panel
             transform.Find("Concept_Panel").Find("Text").GetComponent<TMP_Text>().color = Color.red;
             if (checked_flag) {
                 foreach (Transform item in show_panel.transform) {
@@ -130,10 +134,12 @@ public class Submit_System : MonoBehaviour, IDropHandler
         }
     }
 
-    private Boolean Check() {
+    //Checking process
+    private bool Check() {
         int subtask = ui_script.GetSubTaskNum();
         correct_concept_num = new List<int>();
         for (int i = 0; i < object_name_list[current_sub_task_num].Count; i++) {
+            //empty check case
             if (answer[subtask][i] == null) {
                 if (submitted_concept_info[i].Count != 0) {
                     current_object_num = i;
@@ -142,6 +148,7 @@ public class Submit_System : MonoBehaviour, IDropHandler
                 }
             }
             else{
+                //expected answer check case
                 if (submitted_concept_info[i].Count != answer[subtask][i].Count){
                     current_object_num = i;
                     checked_flag = false;
@@ -150,6 +157,7 @@ public class Submit_System : MonoBehaviour, IDropHandler
                 else {
                     checked_flag = true;
                     foreach (Concept_Info concept_info in answer[subtask][i]) {
+                        //perform concept matching
                         if (submitted_concept_info[i].Any(x => concept_info.Equals(x))) {
                             correct_concept_num.Add(submitted_concept_info[i].IndexOf(concept_info));
                         } 
@@ -166,6 +174,7 @@ public class Submit_System : MonoBehaviour, IDropHandler
         return true;
     }
 
+    //Concept submission process
     public void OnDrop(PointerEventData eventData) {
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(0);
         if (eventData.pointerDrag.transform.Find("Icon").GetComponent<Image>().sprite == concept_block_sprite) {
@@ -181,6 +190,7 @@ public class Submit_System : MonoBehaviour, IDropHandler
         UpdateConceptPanel();
     }
 
+    //Update show panel display
     public void UpdateConceptPanel() {
         transform.Find("Concept_Panel").Find("Text").GetComponent<TMP_Text>().SetText(object_name_list[current_sub_task_num][current_object_num].Item2);
         current_object.GetComponent<Image>().sprite = object_sprite_list[object_name_list[current_sub_task_num][current_object_num].Item1];
@@ -192,11 +202,13 @@ public class Submit_System : MonoBehaviour, IDropHandler
         } 
     }
 
+    //Create show panel item
     public void CreatedItem(Concept_Info concept) {
         GameObject item = Instantiate(item_sample, show_panel.transform);
         item.transform.Find("Text").GetComponent<TMP_Text>().SetText(concept.nickname);
     }
 
+    //Empty show panel
     private void Empty() {
         foreach (Transform obj in show_panel.transform) {
             Destroy(obj.gameObject);

@@ -9,35 +9,36 @@ using System;
 public class UI_Manager : MonoBehaviour
 {
     public DataBase database_script;
-    public GameObject menu;
-    public GameObject blur_panel;
-    public GameObject menu_blur_panel;
+    public GameObject menu;  //prefab of menu
+    public GameObject blur_panel;  //prefab of blur panel
+    public GameObject menu_blur_panel;  //prefab of menu blur panel
 
-    private List<Combined_Card_Info> backpack_cards;
-    public List<Sprite> object_sprite_list;
-    public List<List<Concept_Info>> submitted_concept_info;
+    private List<Combined_Card_Info> backpack_cards;  //current task action card list
+    public List<Sprite> object_sprite_list;  //character sprite list
+    public List<List<Concept_Info>> submitted_concept_info;  //current subtask submitted answer list
 
-    public int current_active_page;
-    public TaskObjectSprite current_task_object_sprites;
-    public TaskObjectName current_task_object_names;
-    public ActionAndObject act_obj;
+    public int current_active_page;  //current page shown number
+    public TaskObjectSprite current_task_object_sprites;  //all character sprite list
+    public TaskObjectName current_task_object_names;  //all character name list
+    public ActionAndObject act_obj;  //all action and object concept list
 
-    public Detective_Item detective_cards;
+    public Detective_Item detective_cards;  //all detective card list
 
-    public SearchPageSpriteList concept_search_sprites; 
-    public Answer answer; 
-    public TaskDialogue dialogue;
-    public Hint hints;
+    public SearchPageSpriteList concept_search_sprites;   //concept serach page sprite list
+    public Answer answer;  //all answer list
+    public TaskDialogue dialogue;  //all dialogur list
+    public Hint hints;  //all hint list
 
-    public int task_number = 0;
-    public int subtask_num = 0;
-    public int current_subtask = 0;
+    public int task_number = 0;  //current task number
+    public int subtask_num = 0;  //current task subtask number
+    public int current_subtask = 0;  //current subtask number
 
-    public float audioVol;
-    public List<AudioClip> sounds;
-    public int task_completed;
+    public float audioVol;  //audio volume value
+    public List<AudioClip> sounds;  //sound list
+    public int task_completed;  //number of task completed
     public int task_total = 20;
 
+    //Desroy excess UI manager and remain one of them throughout the whole game
     void Awake() {
         int num = GameObject.FindGameObjectsWithTag("UI_Manager").Length;
         if (num > 1) {
@@ -48,6 +49,7 @@ public class UI_Manager : MonoBehaviour
         }
     }
 
+    //Initialize the setting
     void Start() {
         (task_completed, audioVol) = database_script.GetPlayerSetting();
         backpack_cards = new List<Combined_Card_Info>();
@@ -63,6 +65,7 @@ public class UI_Manager : MonoBehaviour
         }
     }
 
+    //Call menu panel and close it by ESC detection
     void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
             if (GameObject.Find("Menu") == null) {
@@ -81,37 +84,44 @@ public class UI_Manager : MonoBehaviour
         }
     }
 
+    //Update play status when game terminate
     void OnApplicationQuit()
     {
         database_script.UpdatePlayerSetting(task_completed, audioVol);
     }
 
-    public List<String> GetConceptNames() {
+    //Retrieve concept names
+    public List<string> GetConceptNames() {
         return database_script.GetConceptNames();
     }
 
-    public (String, String) GetConceptInfo(int num, int id) {
+    //Retrieve concept name and its description
+    public (string, string) GetConceptInfo(int num, int id) {
 
         Dictionary<string, string> result = database_script.GetConceptInfo(num, id);
-        String name = result["name"];
-        String description = result["description"];
+        string name = result["name"];
+        string description = result["description"];
         return (name, description);
     }
 
-    public List<String> GetInnerConceptNames(int num) {
+    //Retrieve concept part name
+    public List<string> GetInnerConceptNames(int num) {
         return database_script.GetConceptInnerNames(num);
     }
     
-    public List<String> SearchButtonDatabase(int num) 
+    //Retrieve dropdown search concept list
+    public List<string> SearchButtonDatabase(int num) 
     {
         return database_script.GetSearchConceptList(num);
     }
 
+    //Retrieve action card in backpack 
     public List<Combined_Card_Info> GetCards() 
     {
         return backpack_cards;
     }
 
+    //Retrieve character sprite
     public List<Sprite> GetObjectSprites() 
     {
         switch (task_number) 
@@ -161,6 +171,7 @@ public class UI_Manager : MonoBehaviour
         }
     }
 
+    //Retrieve character name
     public List<List<(int, string)>> GetObjectNames() 
     {
         if (current_task_object_names == null) {
@@ -214,11 +225,13 @@ public class UI_Manager : MonoBehaviour
         }
     }
 
+    //Retrieve concept search page sprite list 
     public List<Sprite> GetConceptSprites() 
     {
         return concept_search_sprites.search_page_sprite_list;
     }
 
+    //Retrieve current task answer
     public List<List<List<Concept_Info>>> GetAnswer() 
     {
         List<List<List<Concept_Info>>> ans;
@@ -309,6 +322,7 @@ public class UI_Manager : MonoBehaviour
         }
     }
 
+    //Retrieve current task action and object concept list
     public (List<Action_Info>, List<Object_Info>) GetActionAndObject() {
         if (act_obj == null) {
             act_obj = new ActionAndObject();
@@ -361,7 +375,8 @@ public class UI_Manager : MonoBehaviour
         }
     }
 
-    public List<String> GetDialogue(){
+    //Retrieve current task dialogue
+    public List<string> GetDialogue(){
         if (dialogue == null) {
             dialogue = new TaskDialogue();
         }
@@ -412,6 +427,7 @@ public class UI_Manager : MonoBehaviour
         }
     }
 
+    //Retrieve current task hint list
     public (List<List<List<string>>>, List<List<List<string>>>, List<List<List<List<int>>>>) GetHint() {
         if (hints == null) {
             hints = new Hint();
@@ -463,33 +479,40 @@ public class UI_Manager : MonoBehaviour
         }
     }
 
+    //Retrieve current subtask number
     public int GetSubTaskNum(){
         return current_subtask;
     }
 
+    //Pass to the next subtask
     public void SetSubTaskNum(){
         current_subtask += 1;
         LoadNextTask();
     }
 
+    //Retrieve number of subtask
     public int GetSubTaskTotal(){
         return subtask_num;
     }
 
+    //Update backpack card list
     public void AddToPackPack(Combined_Card_Info card) {
         backpack_cards.Add(card);
         GameObject.FindGameObjectWithTag("event_system").GetComponent<Search_System>().UpdateCards();
     }
 
+    //Remove action card from backpack 
     public void RemoveFromPackPack(int num) {
         backpack_cards.RemoveAt(num);
         GameObject.FindGameObjectWithTag("event_system").GetComponent<Search_System>().UpdateCards();
     }
 
+    //Update chosen task
     public void SetTask(int num) {
         task_number = num;
     }
 
+    //Update chosen task information and initialize the setting
     public void SetTaskTopic() {
         Top_Bar top = GameObject.Find("TopBar").GetComponent<Top_Bar>();
         switch (task_number) {
@@ -556,7 +579,6 @@ public class UI_Manager : MonoBehaviour
         }
         backpack_cards = new List<Combined_Card_Info>();
 
-        //testing
         current_subtask = 0;
 
         GetAnswer();
@@ -566,18 +588,22 @@ public class UI_Manager : MonoBehaviour
         }     
     }
 
+    //Retrieve current task number
     public int GetTask() {
         return task_number;
     }
 
+    //Retrieve audio volume value
     public float GetAudioVol() {
         return audioVol;
     }
 
+    //Update audio volume value
     public void SetAudioVol(float vol) {
         audioVol = vol;
     }
 
+    //Initialize current task
     public void InitialTask() {
         backpack_cards = new List<Combined_Card_Info>();
 
@@ -590,6 +616,7 @@ public class UI_Manager : MonoBehaviour
         current_subtask = 0;
     }
 
+    //update to the next sub task
     private void LoadNextTask() {
         if (GameObject.FindGameObjectWithTag("event_system") != null) {
             GameObject.FindGameObjectWithTag("event_system").GetComponent<Search_System>().UpdateCards();
@@ -597,14 +624,17 @@ public class UI_Manager : MonoBehaviour
         GameObject.Find("TaskPage").GetComponent<Task_System>().UpdateScene();
     }
 
+    //Update answer submitted
     public void AddCurrentAnswer(List<List<Concept_Info>> info) {
         submitted_concept_info = info;
     }
 
+    //Retrieve answer submitted
     public List<List<Concept_Info>> GetCurrentAnswer() {
         return submitted_concept_info;
     }
 
+    //Blurring effect
     public void Blur_Screen() {
         GameObject panel = Instantiate(blur_panel, GameObject.FindGameObjectWithTag("Canvas").transform);
         panel.name = panel.name.Replace("(Clone)","").Trim();
@@ -612,10 +642,12 @@ public class UI_Manager : MonoBehaviour
         panel.transform.position = new Vector3(center.x,center.y,0);
     }
 
+    //Cancel the blurring effect
     public void UnBlur_Screen() {
         Destroy(GameObject.Find("Blur_Panel"));
     }
 
+    //Blurring effect for menu
     public void Menu_Blur_Screen() {
         GameObject panel = Instantiate(menu_blur_panel, GameObject.FindGameObjectWithTag("Canvas").transform);
         panel.name = panel.name.Replace("(Clone)","").Trim();
@@ -623,10 +655,12 @@ public class UI_Manager : MonoBehaviour
         panel.transform.position = new Vector3(center.x,center.y,0);    
     }
 
+    //Cancel the menu blurring effect
     public void Menu_UnBlur_Screen() {
         Destroy(GameObject.Find("Menu_Blur_Panel"));
     }
 
+    //Play chosen sound effect
     public void PlaySound(int num) {
         AudioSource sound_source = GetComponent<AudioSource>();
         AudioClip sound = sounds[num];
@@ -636,35 +670,38 @@ public class UI_Manager : MonoBehaviour
         sound_source.Play();
     }
 
+    //Retrieve number of task completed
     public int GetTaskCompleted() {
         return task_completed;
     }
 
+    //Retrieve task total number
     public int GetTaskTotal() {
         return task_total;
     }
 
+    //Set the current page number
     public void SetCurrentActivePage(int num) {
         current_active_page = num;
     }
 
-    public int GetCurrentActivePage() {
-        return current_active_page;
-    }
-
+    //Update player status
     public void SetPlayerStatus() {
         task_completed += 1;
         database_script.UpdatePlayerSetting(task_completed, audioVol);
     }
 
+    //Update player login time for the first time
     public void SetPlayerTime() {
         database_script.SetPlayerTime(DateTime.Now);
     }
 
+    //Retrieve first login time
     public string GetPlayerFirstTime() {
         return database_script.GetPlayerTime();
     }
 
+    //Retrieve current task detective card list
     public List<(int, string, string, List<Combined_Card_Info>)> GetDetectCards() {
         if (detective_cards == null) {
             detective_cards = new Detective_Item();

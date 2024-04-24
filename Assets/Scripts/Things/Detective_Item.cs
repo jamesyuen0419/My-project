@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Detective_Item
 {
+    //Storage of all task detective item list
     public List<(int, string, string, List<Combined_Card_Info>)> Detective_Tutorial() {
         List<(int, string, string, List<Combined_Card_Info>)> cards = new List<(int, string, string, List<Combined_Card_Info>)>
         {

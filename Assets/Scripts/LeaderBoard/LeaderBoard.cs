@@ -8,27 +8,29 @@ using UnityEngine.UI;
 
 public class LeaderBoard : MonoBehaviour
 {
-    public UI_Manager ui_script;
+    public UI_Manager ui_script;  //manager script
 
-    public List<Sprite> spritelist;
+    public List<Sprite> spritelist;  //learning state list
 
-    public DateTime first_login_time;
-    public DateTime time_now;
-    public int task_completed;
+    public DateTime first_login_time;  //login date time for enter the task 0
+    public DateTime time_now;  //current date time
+    public int task_completed;  //number of task completed
 
-    public int current_page;
-    public int max_page = 9;
+    public int current_page;  //current page for learning progress
+    public int max_page = 9;  //number of concept
 
 
-    // Start is called before the first frame update
+    //Initialize the setting
     void Start()
     {
         ui_script = GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>();
 
+        //situation when user not yet start any task
         if (ui_script.GetPlayerFirstTime() == null) {
             transform.Find("TimePanel").Find("Time_Message").GetComponent<TMP_Text>().SetText("Let try this game now!");
         }
         else {
+            //calculate hours difference
             first_login_time = DateTime.Parse(ui_script.GetPlayerFirstTime());
             time_now = DateTime.Now;
             string hours = Mathf.RoundToInt((time_now - first_login_time).TotalHours.ConvertTo<float>()).ToString();
@@ -46,6 +48,7 @@ public class LeaderBoard : MonoBehaviour
         UpdateProgress();
     }
 
+    //Control learning progress to the previous page
     public void LeftButtonEvent() {
         ui_script.PlaySound(0);
         if (current_page > 0) {
@@ -54,6 +57,7 @@ public class LeaderBoard : MonoBehaviour
         }
     }
 
+    //Control learning progress to the next page
     public void RightButtonEvent() {
         ui_script.PlaySound(0);
         if (current_page < max_page - 1) {
@@ -62,12 +66,14 @@ public class LeaderBoard : MonoBehaviour
         }
     }
 
+    //Check the learning progress for certain concept and modify the provided information
     public void UpdateProgress() {
         string concept = "";
         int progress = 0;
         string level = "";
         string next_level = "";
 
+        //set the learning progress for different concept
         switch (current_page) {
             case 0:
                 concept = "Looping";
@@ -113,6 +119,7 @@ public class LeaderBoard : MonoBehaviour
         transform.Find("ConceptPanel").Find("ShowPanel").Find("Image").GetComponent<Image>().sprite = spritelist[progress];
         transform.Find("ConceptPanel").Find("DescriptionPanel").Find("LinePanel").Find("ProgressPanel1").Find("Text").GetComponent<TMP_Text>().SetText("Progress of " + concept + " Concept: " + level);
         
+        //set up provided information
         string progress_text = "";
         string next_text = "You can reach the next level after finish task " + next_level;
         switch (level) {
@@ -134,6 +141,7 @@ public class LeaderBoard : MonoBehaviour
         transform.Find("ConceptPanel").Find("DescriptionPanel").Find("LinePanel").Find("ProgressPanel3").Find("Text").GetComponent<TMP_Text>().SetText(next_text);
     }
 
+    //Learning progress information set up function
     (int, string, string) FindConcept(int l1, int l2, int l3) {
         if (task_completed < l1) {
             return (0, "Kid", (l1 - task_completed).ToString());

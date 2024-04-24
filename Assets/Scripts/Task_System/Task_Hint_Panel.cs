@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Task_Hint_Panel : MonoBehaviour
 {
+    //Close the hint panel
     public void CloseButtonEvent() {
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(0);
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().UnBlur_Screen();

@@ -5,13 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class Top_Bar_TaskChosen : MonoBehaviour
 {
-    public GameObject tutorial_panel;
+    public GameObject tutorial_panel;  //prefab of tutorial panel
 
+    //Redirect to start page
     public void CloseButtonEvent() {
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(0);
         SceneManager.LoadScene("StartScene");
     }
 
+    //Call the tutorial panel
     public void TutorialButtonEvent() {
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(4);
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().Blur_Screen();

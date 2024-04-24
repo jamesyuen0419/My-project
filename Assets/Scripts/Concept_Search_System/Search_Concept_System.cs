@@ -54,7 +54,7 @@ public class Search_Concept_System : MonoBehaviour
         concept_info.SetActive(false);
     }
 
-    //button to control the cover page
+    //Control to the previous concept
     public void LeftButtonEvent() {
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(3);
         if (current_page > 0) {
@@ -64,7 +64,7 @@ public class Search_Concept_System : MonoBehaviour
         }
     }
 
-    //button to control the cover page
+    //Control to the next concept
     public void RightButtonEvent() {
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(3);
         if (current_page < concept_titles.Count - 1) {
@@ -98,7 +98,7 @@ public class Search_Concept_System : MonoBehaviour
         concept_info.SetActive(false);
     }
 
-    //button to control the description page
+    //Control to the previous concept description
     public void LeftButton2Event() {
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(3);
         if (current_inner_page > 0) {
@@ -112,7 +112,7 @@ public class Search_Concept_System : MonoBehaviour
         }
     }
 
-    //button to control the description page
+    //Control to the next concept description
     public void RightButton2Event() {
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(3);
         if (current_inner_page < concept_inner_titles.Count - 1) {

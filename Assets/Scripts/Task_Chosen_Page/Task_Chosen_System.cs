@@ -6,28 +6,27 @@ using UnityEngine.UI;
 
 public class Task_Chosen_System : MonoBehaviour
 {
-    public GameObject container;
-    public GameObject task_component;
-    public int task_total = 20;
-    public int task_completed = -1;
-    public int current_head = 0;
+    public GameObject container;  //task conponent container
+    public GameObject task_component;  //prefab of task component
+    public int task_total = 20;  //total task number
+    public int task_completed = -1;  //number of task completed
+    public int current_head = 0;  
     
-    // Start is called before the first frame update
+    //Initialize the setting
     void Start()
     {
         container = transform.Find("Task_Container").gameObject;
-        //task_completed = GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().GetTaskCompleted();
-        task_completed = 20;
+        task_completed = GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().GetTaskCompleted();
         CreateTaskBlock();
     }
 
+    //Create the task component in the container
     private void CreateTaskBlock() {
         Empty();
         int block_created = 0;
 
         if (task_completed == -1) {
-            //task_completed = GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().GetTaskCompleted();
-            task_completed = 20;
+            task_completed = GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().GetTaskCompleted();
         }
 
         for (int i = current_head; i < task_total; i++) {
@@ -38,6 +37,7 @@ public class Task_Chosen_System : MonoBehaviour
             GameObject com = Instantiate(task_component, container.transform);
             com.name = com.name.Replace("(Clone)","").Trim();
             com.GetComponent<Task_Component>().SetTaskNum(i);
+            //disable unreachable task
             if (i > task_completed) {
                 com.GetComponent<Button>().interactable = false;
             }
@@ -46,6 +46,7 @@ public class Task_Chosen_System : MonoBehaviour
         }
     }
 
+    //Control container to the previous page
     public void LeftButtonEvent() {
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(3);
         if (current_head - 6 >= 0) {
@@ -54,6 +55,7 @@ public class Task_Chosen_System : MonoBehaviour
         }
     }
 
+    //Control container to the next page
     public void RightButtonEvent() {
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(3);
         if (current_head + 6 < task_total) {
@@ -62,6 +64,7 @@ public class Task_Chosen_System : MonoBehaviour
         }
     }
 
+    //Empty container
     private void Empty() {
         foreach (Transform child in container.transform) {
             Destroy(child.gameObject);

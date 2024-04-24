@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class TaskDialogue
 {
+    //Storage of all task dialogue
     List<string> dialogue;
 
     public List<string> Tutorial1() {

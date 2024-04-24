@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ActionAndObject
 {
+    //Storage of all task action and object concept list
     public (List<Action_Info>, List<Object_Info>) Tutorial1() {
         List<Action_Info> actions = new List<Action_Info>
         {

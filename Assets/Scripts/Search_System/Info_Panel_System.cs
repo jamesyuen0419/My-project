@@ -6,30 +6,27 @@ using TMPro;
 
 public class Info_Panel_System : MonoBehaviour
 {
-    public GameObject region_name;
-    public GameObject Left_Button;
-    public GameObject Right_Button;
-    public GameObject mainConceptContainer;
-    public GameObject mainConceptList;
-    public GameObject itemSample;
-    public GameObject mainConcept2Container;
-    public GameObject mainConceptList2;
-    public GameObject itemSample2;
+    public GameObject region_name;  //object to show current concept part name
+    public GameObject mainConceptContainer;  //concept container type 1 (block type)
+    public GameObject mainConceptList;  //concept container content type 1
+    public GameObject itemSample;  //type 1 component
+    public GameObject mainConcept2Container;  //concept container type 2 (word type)
+    public GameObject mainConceptList2;  //concept container content type 2
+    public GameObject itemSample2;  //type 2 component
 
-    public int current_name;
-    public String action_concept_name;
-    public Concept_Info concept_info;
+    public int current_name;  //current region number
+    public string action_concept_name;  //action card concept name
+    public Concept_Info concept_info;  //action card concept information
 
-    public List<String> Region_names;
-    public Dictionary<String, String> listType2Value;
-    public List<List<Concept_Info>> listType1Value;
-    public List<int> mode;
+    public List<string> Region_names;  //region name list
+    public Dictionary<string, string> listType2Value;  //container type 2 list
+    public List<List<Concept_Info>> listType1Value;  //container type 1 list
+    public List<int> mode;  //region mode list
 
+    //Initialize the setting
     void Start()
     {
         region_name = transform.Find("Region_Name").gameObject;
-        Left_Button = transform.Find("Left_Button").gameObject;
-        Right_Button = transform.Find("Right_Button").gameObject;
         mainConceptContainer = GameObject.FindGameObjectWithTag("concept_adjust_list");
         mainConceptList = GameObject.FindGameObjectWithTag("concept_adjust_list").transform.Find("Viewport").Find("Content").gameObject;
         mainConcept2Container = GameObject.FindGameObjectWithTag("concept_adjust_list_2");
@@ -40,11 +37,13 @@ public class Info_Panel_System : MonoBehaviour
         UpdateAdjustList();
     }
 
-    public void UpdateContent(String name, Concept_Info concept_info) {
+    //Update the information
+    public void UpdateContent(string name, Concept_Info concept_info) {
         action_concept_name = name;
         this.concept_info = concept_info;
     }
 
+    //Update the setting and information of the panel according to concept type
     public void UpdateAdjustList() {
         switch (action_concept_name) {
             case "Condition":
@@ -198,6 +197,7 @@ public class Info_Panel_System : MonoBehaviour
         PrintAdjustList();
     }
 
+    //Print the concept list
     public void PrintAdjustList() {
         region_name.GetComponent<TMP_Text>().SetText(Region_names[current_name]);
         if (mode[current_name] == 0) {
@@ -220,12 +220,14 @@ public class Info_Panel_System : MonoBehaviour
         }
     }
 
+    //Create the item in concept list
     public void CreatedItem(Concept_Info concept) {
         GameObject item = Instantiate(itemSample, mainConceptList.transform);
         Info_Panel_Item itemInfo = item.GetComponent<Info_Panel_Item>();
         itemInfo.UpdateName(concept.nickname);
     }
 
+    //Create the type information item
     public void CreatedItem2(String type, String value) {
         GameObject item = Instantiate(itemSample2, mainConceptList2.transform);
         item.name = item.name.Replace("(Clone)","").Trim();
@@ -234,6 +236,7 @@ public class Info_Panel_System : MonoBehaviour
         item.transform.Find("InputField").gameObject.GetComponent<TMP_InputField>().interactable = false;
     }
 
+    //Empty concept component display
     private void Empty(int num) {
         if (num == 0) {
             int childNumber = mainConceptList2.transform.childCount;
@@ -249,6 +252,7 @@ public class Info_Panel_System : MonoBehaviour
         }
     }
 
+    //Control to the previous region
     public void LeftButtonEvent() {
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(3);
         if (current_name > 0) {
@@ -257,6 +261,7 @@ public class Info_Panel_System : MonoBehaviour
         }
     }
 
+    //Control to the next region
     public void RightButtonEvent() {
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(3);
         if (current_name < Region_names.Count - 1) {
@@ -265,6 +270,7 @@ public class Info_Panel_System : MonoBehaviour
         }
     }
 
+    //Close the info panel
     public void CloseButtonEvent() {
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(0);
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().UnBlur_Screen();

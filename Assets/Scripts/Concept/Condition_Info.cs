@@ -7,7 +7,7 @@ public class Condition_Info : Concept_Info
     //Concept Content
     public Concept_Info condition;
 
-    ////Constructor for condition concept
+    //Constructor for condition concept
     public Condition_Info(Concept_Info condition) {
         concept_name = "Condition";
         this.condition = condition;

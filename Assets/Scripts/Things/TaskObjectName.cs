@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TaskObjectName
 {
+    //Storage of all task character sprite number and name list
     public List<List<(int, string)>> Task1 = new List<List<(int, string)>> {
         new List<(int, string)> {(0,"Helper")},
         new List<(int, string)> {(0,"Helper")}

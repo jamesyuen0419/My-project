@@ -7,35 +7,35 @@ using UnityEngine.UI;
 
 public class Search_System_Forge_Panel : MonoBehaviour
 {
-    public GameObject item;
-    public GameObject blank_item;
-    public GameObject function_image;
+    public GameObject item;  //shown item
+    public GameObject blank_item;  //prefab of blank item
+    public GameObject function_image;  //current mode sprite shown
 
-    public UI_Manager ui_script;
+    public UI_Manager ui_script;  //manager script
 
     public GameObject search_function_panel;
-    public GameObject dropdown;
-    public TMP_Dropdown dropdownObj;
+    public GameObject dropdown;  //dropdown menu
+    public TMP_Dropdown dropdownObj;  //current dropdown object
 
     public GameObject action_card_function_panel;
 
     public GameObject item_panel;
 
-    public int systemMode = 1;
-    public int pos = 0;
-    public int function_pos = 0;
+    public int systemMode = 1;  //current system mode
+    public int pos = 0;  //current item number
+    public int function_pos = 0;  //current function number
 
-    public List<Sprite> function_sprites;
+    public List<Sprite> function_sprites;  //function sprite list
 
-    public List<Action_Info> task_action;
-    public List<Object_Info> task_object;
-    public List<Combined_Card_Info> action_cards;
-    public List<String> concept_names;
+    public List<Action_Info> task_action;  //action concept list
+    public List<Object_Info> task_object;  //object concept list
+    public List<Combined_Card_Info> action_cards;  //action card list
+    public List<string> concept_names;  //concept name list
 
-    public GameObject concept_block;
-    public GameObject action_card;
+    public GameObject concept_block;  //prefab of concept block
+    public GameObject action_card;  //prefab of action card
 
-    //Tested
+    //Initialize the setting
     void Start()
     {
         ui_script = GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>();
@@ -59,6 +59,7 @@ public class Search_System_Forge_Panel : MonoBehaviour
         ChangeFunctionMode();
     }
 
+    //Control to the previous function
     public void FunctionLeftButtonEvent() {
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(3);
         if (function_pos > 0) {
@@ -67,6 +68,7 @@ public class Search_System_Forge_Panel : MonoBehaviour
         }
     }
 
+    //Control to the next function
     public void FunctionRightButtonEvent() {
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(3);
         if (function_pos < 1) {
@@ -75,6 +77,7 @@ public class Search_System_Forge_Panel : MonoBehaviour
         }
     }
 
+    //Mode chosen function
     void ChangeFunctionMode() {
         function_image.GetComponent<Image>().sprite = function_sprites[function_pos];
         switch (function_pos) {
@@ -87,6 +90,7 @@ public class Search_System_Forge_Panel : MonoBehaviour
         }
     }
 
+    //Concept mode setting
     public void ConceptButtonEvent() {
         search_function_panel.SetActive(true);
         action_card_function_panel.SetActive(false);
@@ -103,6 +107,7 @@ public class Search_System_Forge_Panel : MonoBehaviour
 
     }
 
+    //Backpack mode setting
     public void BackpackButtonEvent() {
         search_function_panel.SetActive(false);
         action_card_function_panel.SetActive(true);
@@ -115,6 +120,7 @@ public class Search_System_Forge_Panel : MonoBehaviour
         CreateActionCard();
     }
 
+    //Control to the previous concept
     public void LeftButtonEvent() {
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(3);
         if (systemMode == 1) {
@@ -131,6 +137,7 @@ public class Search_System_Forge_Panel : MonoBehaviour
         }
     }
 
+    //Control to the next concept
     public void RightButtonEvent() {
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(3);
         if (systemMode == 1) {
@@ -147,10 +154,12 @@ public class Search_System_Forge_Panel : MonoBehaviour
         }
     }
 
+    //Search process of certain type of concept
     public void SearchButtonEvent() {
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(0);
         pos = 0;
         int concept_number = dropdownObj.value;
+        //action and object concept are stored in this system, no need to perform database search
         if (concept_number == 7) {
             concept_names.Clear();
             for (int i = 0; i < task_action.Count; i++) {
@@ -175,6 +184,7 @@ public class Search_System_Forge_Panel : MonoBehaviour
         }
     }
 
+    //Create concept block to replace current item
     private void CreateConceptBlock() {
         GameObject o1;
         o1 = Instantiate(concept_block, item_panel.transform);
@@ -185,7 +195,7 @@ public class Search_System_Forge_Panel : MonoBehaviour
         Addinfo(true);
     }
 
-
+    //Create action card to replace current item
     private void CreateActionCard() {
         GameObject o1;
         if (action_cards.Count == 0) {
@@ -204,7 +214,8 @@ public class Search_System_Forge_Panel : MonoBehaviour
         }
     }
 
-    private void Addinfo(Boolean type) {
+    //Initialize concept block information 
+    private void Addinfo(bool type) {
         if (type) {
             Draggable_Concept con = item.GetComponent<Draggable_Concept>();
             con.concept_name = concept_names[pos];
@@ -270,7 +281,7 @@ public class Search_System_Forge_Panel : MonoBehaviour
             }
 
             con.concept_info.nickname = con.concept_name;
-
+            //substring when name length out of range
             if (con.concept_name == "Action") {
                 if (task_action[pos].action.Length > 20) {
                     item.transform.Find("Concept_Name").GetComponent<TMP_Text>().SetText(task_action[pos].action.Substring(0,17) + "...");
@@ -303,7 +314,7 @@ public class Search_System_Forge_Panel : MonoBehaviour
             act.concept_name = action_cards[pos].concept_name;
             act.concept_info = action_cards[pos].concept_info;
             act.concept_info.nickname = action_cards[pos].nickname;
-            
+            //substring when name length out of range
             if (action_cards[pos].nickname.Length > 20) {
                 item.transform.Find("Concept_Name").GetComponent<TMP_Text>().SetText(action_cards[pos].nickname.Substring(0,17) + "...");
             }
@@ -314,6 +325,7 @@ public class Search_System_Forge_Panel : MonoBehaviour
 
     }
 
+    //Reload the action card shown
     public void UpdateCards() {
         action_cards = ui_script.GetCards();
         if (systemMode == 2) {

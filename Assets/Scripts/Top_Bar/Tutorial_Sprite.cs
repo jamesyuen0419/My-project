@@ -5,6 +5,7 @@ using System;
 
 [Serializable] public class Tutorial_Sprite
 {
+    //Storage of all tutorial topic sprite list
     public List<Sprite> p1;
     public List<Sprite> p2;
     public List<Sprite> p3;

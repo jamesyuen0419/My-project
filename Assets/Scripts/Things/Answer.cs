@@ -6,6 +6,7 @@ using UnityEngine;
 
 [Serializable] public class Answer
 {
+    //Storage of all task answer list
     List<List<List<Concept_Info>>> answer;
 
     public List<List<List<Concept_Info>>> Tutorial1() {
@@ -148,40 +149,34 @@ using UnityEngine;
         answer = NewAnswer();
 
         answer.Add(NewSubTask());
-        answer[0].Add(NewObject());
-        answer[0].Add(NewObject());
+        AddNewObject(answer[0],2);
         Object_Info ans01 = new Object_Info("school bag");
         answer[0][0].Add(ans01);
 
         answer.Add(NewSubTask());
-        answer[1].Add(NewObject());
-        answer[1].Add(NewObject());
+        AddNewObject(answer[1],2);
         If_Statement_Info ans11 = new If_Statement_Info(new Condition_Info(new Action_Info("Bus arrives")), new List<Concept_Info> {new Action_Info("Enter the bus")});
         If_Statement_Info ans12 = new If_Statement_Info(new Condition_Info(new Action_Info("Bus not yet arrived")), new List<Concept_Info> {new Action_Info("Play mobile games")});
         answer[1][0].Add(ans11);
         answer[1][0].Add(ans12);
 
         answer.Add(NewSubTask());
-        answer[2].Add(NewObject());
-        answer[2].Add(NewObject());
+        AddNewObject(answer[2],2);
         If_Statement_Info ans21 = new If_Statement_Info(new Condition_Info(new Comparison_Info(new Object_Info("bag's item"),new Object_Info("octopus card"),new Logic_Info("=="))), new List<Concept_Info> {new Action_Info("Take out")});
         answer[2][0].Add(ans21);
 
         answer.Add(NewSubTask());
-        answer[3].Add(NewObject());
-        answer[3].Add(NewObject());
+        AddNewObject(answer[3],2);
         Container_Info ans31 = new Container_Info(new List<Concept_Info> {new Object_Info("Math assignment"), new Object_Info("English assignment")});
         answer[3][0].Add(ans31);
 
         answer.Add(NewSubTask());
-        answer[4].Add(NewObject());
-        answer[4].Add(NewObject());
+        AddNewObject(answer[4],2);
         Comparison_Info ans41 = new Comparison_Info(new Object_Info("tiger's score"), new Variable_Info("Integer", "2"), new Logic_Info("=="));
         answer[4][0].Add(ans41);
 
         answer.Add(NewSubTask());
-        answer[5].Add(NewObject());
-        answer[5].Add(NewObject());
+        AddNewObject(answer[5],2);
         Container_Info ans51 = new Container_Info(new List<Concept_Info> {new Action_Info("Grab the school bag"), new Action_Info("Stand up"), new Action_Info("Get out the bus")});
         answer[5][0].Add(ans51);
         answer[5][1].Add(ans51);
@@ -193,16 +188,14 @@ using UnityEngine;
         answer = NewAnswer();
 
         answer.Add(NewSubTask());
-        answer[0].Add(NewObject());
-        answer[0].Add(NewObject());
+        AddNewObject(answer[0],2);
         Action_Info ans01 = new Action_Info("Pick up A");
         Action_Info ans02 = new Action_Info("Pick up B");
         answer[0][0].Add(ans01);
         answer[0][1].Add(ans02);
 
         answer.Add(NewSubTask());
-        answer[1].Add(NewObject());
-        answer[1].Add(NewObject());
+        AddNewObject(answer[1],2);
         Action_Info ans11 = new Action_Info("Pour A to beaker A");
         Action_Info ans12 = new Action_Info("Pour B to beaker A");
         Action_Info ans13 = new Action_Info("Mix beaker A");
@@ -211,14 +204,12 @@ using UnityEngine;
         answer[1][1].Add(ans12);
 
         answer.Add(NewSubTask());
-        answer[2].Add(NewObject());
-        answer[2].Add(NewObject());
+        AddNewObject(answer[2],2);
         If_Statement_Info ans21 = new If_Statement_Info(new Condition_Info(new Comparison_Info(new Object_Info("Chemical color"),new Object_Info("Expected chemical color"),new Logic_Info("=="))), new List<Concept_Info> {new Action_Info("Pick up C"), new Action_Info("Pour C to beaker A")});
         answer[2][0].Add(ans21);
 
         answer.Add(NewSubTask());
-        answer[3].Add(NewObject());
-        answer[3].Add(NewObject());
+        AddNewObject(answer[3],2);
         Action_Info ans31 = new Action_Info("Mix beaker A");
         Action_Info ans32 = new Action_Info("Pick up D");
         Looping_Info ans33 = new Looping_Info(new Range_Info(5, 14, 1), new List<Concept_Info> {new Action_Info("Pour D to beaker A")}, null, null);
@@ -227,36 +218,31 @@ using UnityEngine;
         answer[3][0].Add(ans33);
 
         answer.Add(NewSubTask());
-        answer[4].Add(NewObject());
-        answer[4].Add(NewObject());
+        AddNewObject(answer[4],2);
         Action_Info ans41 = new Action_Info("Take bunsen burner");
         Action_Info ans42 = new Action_Info("Take tripod");
         answer[4][1].Add(ans41);
         answer[4][0].Add(ans42);
 
         answer.Add(NewSubTask());
-        answer[5].Add(NewObject());
-        answer[5].Add(NewObject());
+        AddNewObject(answer[5],2);
         Action_Info ans51 = new Action_Info("Set up");
         Action_Info ans52 = new Action_Info("Place on the tripod");
         answer[5][1].Add(ans51);
         answer[5][0].Add(ans52);
 
         answer.Add(NewSubTask());
-        answer[6].Add(NewObject());
-        answer[6].Add(NewObject());
+        AddNewObject(answer[6],2);
         Looping_Info ans61 = new Looping_Info(new Range_Info(1, 19, 2), new List<Concept_Info> {new Action_Info("Pour C to beaker A")}, null, null);
         answer[6][1].Add(ans61);
 
         answer.Add(NewSubTask());
-        answer[7].Add(NewObject());
-        answer[7].Add(NewObject());
+        AddNewObject(answer[7],2);
         If_Statement_Info ans71 = new If_Statement_Info(new Condition_Info(new Comparison_Info(new Object_Info("Chemical color"), new Object_Info("Red"), new Logic_Info("=="))), new List<Concept_Info> {new Action_Info("Pour chemical to beaker B")});
         answer[7][1].Add(ans71);
 
         answer.Add(NewSubTask());
-        answer[8].Add(NewObject());
-        answer[8].Add(NewObject());
+        AddNewObject(answer[8],2);
         Action_Info ans81 = new Action_Info("Submit");
         Action_Info ans82 = new Action_Info("Clear the table");
         answer[8][0].Add(ans81);
@@ -269,40 +255,34 @@ using UnityEngine;
         answer = NewAnswer();
 
         answer.Add(NewSubTask());
-        answer[0].Add(NewObject());
-        answer[0].Add(NewObject());
+        AddNewObject(answer[0],2);
         If_Statement_Info ans01 = new If_Statement_Info(new Condition_Info(new Comparison_Info(new Object_Info("Book shelf's item"), new Object_Info("Dust"), new Logic_Info("=="))), new List<Concept_Info> {new Action_Info("Clean it")});
         answer[0][0].Add(ans01);
 
         answer.Add(NewSubTask());
-        answer[1].Add(NewObject());
-        answer[1].Add(NewObject());
+        AddNewObject(answer[1],2);
         Looping_Info ans11 = new Looping_Info(new Range_Info(1,20,1), new List<Concept_Info> {new If_Statement_Info(new Condition_Info(new Comparison_Info(new Object_Info("Book"),new Object_Info("Useful"),new Logic_Info("!="))), new List<Concept_Info> {new Action_Info("Take it out")})},null,null);
         answer[1][0].Add(ans11);
 
         answer.Add(NewSubTask());
-        answer[2].Add(NewObject());
-        answer[2].Add(NewObject());
+        AddNewObject(answer[2],2);
         Container_Info ans21 = new Container_Info(new List<Concept_Info> {new Object_Info("Book 1"),new Object_Info("Book 3"),new Object_Info("Book 6"),new Object_Info("Book 10")});
         answer[2][1].Add(ans21);
         
         answer.Add(NewSubTask());
-        answer[3].Add(NewObject());
-        answer[3].Add(NewObject());
+        AddNewObject(answer[3],2);
         Looping_Info ans31 = new Looping_Info(new Range_Info(1,15,1), new List<Concept_Info> {new If_Statement_Info(new Condition_Info(new Comparison_Info(new Object_Info("Food's expired date"),new Object_Info("Today's date"),new Logic_Info("<"))), new List<Concept_Info> {new Action_Info("Throw it away")})}, new Condition_Info(new Comparison_Info(new Object_Info("Food's expired date"),new Object_Info("Today's date"),new Logic_Info(">"))), null);
         answer[3][0].Add(ans31);
 
         answer.Add(NewSubTask());
-        answer[4].Add(NewObject());
-        answer[4].Add(NewObject());
+        AddNewObject(answer[4],2);
         Object_Info ans41 = new Object_Info("Wall - not cleaned");
         Object_Info ans42 = new Object_Info("Toilet - not cleaned");
         answer[4][1].Add(ans41);
         answer[4][1].Add(ans42);
 
         answer.Add(NewSubTask());
-        answer[5].Add(NewObject());
-        answer[5].Add(NewObject());
+        AddNewObject(answer[5],2);
         Container_Info ans51 = new Container_Info(new List<Concept_Info> {new Object_Info("Apple"), new Object_Info("Pear"), new Object_Info("Toilet paper")});
         answer[5][0].Add(ans51);
 
@@ -313,42 +293,33 @@ using UnityEngine;
         answer = NewAnswer();
 
         answer.Add(NewSubTask());
-        answer[0].Add(NewObject());
-        answer[0].Add(NewObject());
+        AddNewObject(answer[0],2);
         Object_Info ans01 = new Object_Info("Restaurant");
         answer[0][1].Add(ans01);
     
         answer.Add(NewSubTask());
-        answer[1].Add(NewObject());
-        answer[1].Add(NewObject());
-        answer[1].Add(NewObject());
+        AddNewObject(answer[1],3);
         Variable_Info ans11 = new Variable_Info("Integer", "2");
         answer[1][2].Add(ans11);
 
         answer.Add(NewSubTask());
-        answer[2].Add(NewObject());
-        answer[2].Add(NewObject());
-        answer[2].Add(NewObject());
+        AddNewObject(answer[2],3);
         Looping_Info ans21 = new Looping_Info(new Range_Info(1,10,1), new List<Concept_Info> { new Action_Info("Read Menu"), new If_Statement_Info(new Condition_Info(new Comparison_Info(new Object_Info("Food"), new Object_Info("Chosen Food"), new Logic_Info("=="))), new List<Concept_Info> {new Action_Info("Tell Waiter")})}, new Condition_Info(new Comparison_Info(new Object_Info("Food"), new Object_Info("Chosen Food"), new Logic_Info("=="))), null);
         answer[2][0].Add(ans21);
         answer[2][1].Add(ans21);
 
         answer.Add(NewSubTask());
-        answer[3].Add(NewObject());
-        answer[3].Add(NewObject());
-        answer[3].Add(NewObject());
+        AddNewObject(answer[3],3);
         Object_Info ans31 = new Object_Info("Supermarket");
         answer[3][0].Add(ans31);
 
         answer.Add(NewSubTask());
-        answer[4].Add(NewObject());
-        answer[4].Add(NewObject());
+        AddNewObject(answer[4],2);
         Container_Info ans41 = new Container_Info(new List<Concept_Info> {new Action_Info("Go Section A"),new Action_Info("Buy Things"),new Action_Info("Go Section C"),new Action_Info("Buy Things")});
         answer[4][0].Add(ans41);
 
         answer.Add(NewSubTask());
-        answer[5].Add(NewObject());
-        answer[5].Add(NewObject());
+        AddNewObject(answer[5],2);
         Container_Info ans51 = new Container_Info(new List<Concept_Info> {new Variable_Info("String", "Right"), new Variable_Info("String", "Walk 10"), new Variable_Info("String", "Left"),new Variable_Info("String", "Walk 5"), new Variable_Info("String", "Left"), new Variable_Info("String", "Walk 10")});
         answer[5][0].Add(ans51);
 
@@ -391,14 +362,12 @@ using UnityEngine;
         answer = NewAnswer();
 
         answer.Add(NewSubTask());
-        answer[0].Add(NewObject());
-        answer[0].Add(NewObject());
+        AddNewObject(answer[0],2);
         Object_Info ans01 = new Object_Info("Recipe");
         answer[0][0].Add(ans01);
 
         answer.Add(NewSubTask());
-        answer[1].Add(NewObject());
-        answer[1].Add(NewObject());
+        AddNewObject(answer[1],2);
         Object_Info ans11 = new Object_Info("Flour");
         Object_Info ans12 = new Object_Info("Butter");
         Object_Info ans13 = new Object_Info("Sugar");
@@ -413,36 +382,31 @@ using UnityEngine;
         answer[1][1].Add(ans16);
 
         answer.Add(NewSubTask());
-        answer[2].Add(NewObject());
-        answer[2].Add(NewObject());
+        AddNewObject(answer[2],2);
         Container_Info ans21 = new Container_Info(new List<Concept_Info> {new Action_Info("Put"), new Object_Info("Sugar"), new Object_Info("Butter"), new Object_Info("Egg"), new Object_Info("Vanilla"), new Action_Info("End")});
         Container_Info ans22 = new Container_Info(new List<Concept_Info> {new Action_Info("Mix"), new Object_Info("Flour"), new Object_Info("Leaveners"), new Action_Info("End")});
         answer[2][0].Add(ans21);
         answer[2][1].Add(ans22);
 
         answer.Add(NewSubTask());
-        answer[3].Add(NewObject());
-        answer[3].Add(NewObject());
+        AddNewObject(answer[3],2);
         Container_Info ans31 = new Container_Info(new List<Concept_Info> {new Action_Info("Blend"), new Object_Info("flour mixture"), new Object_Info("butter mixture"), new Action_Info("End")});
         answer[3][1].Add(ans31);
 
         answer.Add(NewSubTask());
-        answer[4].Add(NewObject());
-        answer[4].Add(NewObject());
+        AddNewObject(answer[4],2);
         Container_Info ans41 = new Container_Info(new List<Concept_Info> {new Action_Info("Roll"), new Object_Info("final mixture"), new Action_Info("End")});
         answer[4][0].Add(ans41);
 
         answer.Add(NewSubTask());
-        answer[5].Add(NewObject());
-        answer[5].Add(NewObject());
+        AddNewObject(answer[5],2);
         Object_Info ans51 = new Object_Info("star cookie mold");
         Object_Info ans52 = new Object_Info("apple cookie mold");
         answer[5][0].Add(ans51);
         answer[5][0].Add(ans52);
 
         answer.Add(NewSubTask());
-        answer[6].Add(NewObject());
-        answer[6].Add(NewObject());
+        AddNewObject(answer[6],2);
         Container_Info ans61 = new Container_Info(new List<Concept_Info> {new Action_Info("Put In"), new Object_Info("cookie"), new Object_Info("Place to put your cookie"), new Action_Info("End")});
         answer[6][1].Add(ans61);
 
@@ -453,15 +417,13 @@ using UnityEngine;
         answer = NewAnswer();
 
         answer.Add(NewSubTask());
-        answer[0].Add(NewObject());
-        answer[0].Add(NewObject());
+        AddNewObject(answer[0],2);
         Object_Info ans01 = new Object_Info("Indoor Badminton Court Position");
         answer[0][0].Add(ans01);
         answer[0][1].Add(ans01);
 
         answer.Add(NewSubTask());
-        answer[1].Add(NewObject());
-        answer[1].Add(NewObject());
+        AddNewObject(answer[1],2);
         Object_Info ans11 = new Object_Info("badminton racket");
         Object_Info ans12 = new Object_Info("shuttle");
         answer[1][0].Add(ans11);
@@ -476,15 +438,13 @@ using UnityEngine;
         answer[2][0].Add(ans21);
 
         answer.Add(NewSubTask());
-        answer[3].Add(NewObject());
-        answer[3].Add(NewObject());
+        AddNewObject(answer[3],2);
         Object_Info ans31 = new Object_Info("Indoor Basketball Court Position");
         answer[3][0].Add(ans31);
         answer[3][1].Add(ans31);
 
         answer.Add(NewSubTask());
-        answer[4].Add(NewObject());
-        answer[4].Add(NewObject());
+        AddNewObject(answer[4],2);
         Object_Info ans41 = new Object_Info("Tom");
         Object_Info ans42 = new Object_Info("Herry");
         Object_Info ans43 = new Object_Info("Peter");
@@ -507,9 +467,7 @@ using UnityEngine;
         answer[5][0].Add(ans51);
 
         answer.Add(NewSubTask());
-        answer[6].Add(NewObject());
-        answer[6].Add(NewObject());
-        answer[6].Add(NewObject());
+        AddNewObject(answer[6],3);
         Object_Info ans61 = new Object_Info("Entrance");
         answer[6][0].Add(ans61);
         answer[6][1].Add(ans61);
@@ -527,8 +485,7 @@ using UnityEngine;
         answer[0][0].Add(ans01);
 
         answer.Add(NewSubTask());
-        answer[1].Add(NewObject());
-        answer[1].Add(NewObject());
+        AddNewObject(answer[1],2);
         Object_Info ans11 = new Object_Info("Gear 2");
         Object_Info ans12 = new Object_Info("Gear 1");
         answer[1][0].Add(ans11);
@@ -545,11 +502,7 @@ using UnityEngine;
         answer = NewAnswer();
 
         answer.Add(NewSubTask());
-        answer[0].Add(NewObject());
-        answer[0].Add(NewObject());
-        answer[0].Add(NewObject());
-        answer[0].Add(NewObject());
-        answer[0].Add(NewObject());
+        AddNewObject(answer[0],5);
         If_Statement_Info ans01 = new If_Statement_Info(new Condition_Info(new Object_Info("want to order food")), new List<Concept_Info> {new Action_Info("Order")});
         If_Statement_Info ans02 = new If_Statement_Info(new Condition_Info(new Object_Info("finish the lunch")), new List<Concept_Info> {new Action_Info("Arrive Checkout Counter"),new Action_Info("Pay")});
         answer[0][0].Add(ans01);

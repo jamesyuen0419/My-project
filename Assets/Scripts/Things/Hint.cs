@@ -4,26 +4,24 @@ using UnityEngine;
 
 public class Hint
 {
+    //Storage of all task hint list
     public (List<List<List<string>>>, List<List<List<string>>>, List<List<List<List<int>>>>) Tutorial1() {
         List<List<List<string>>> title = NewThings();
         title.Add(NewCharacter());
-        title[0].Add(NewScene());
+        AddNewScene(title[0], 2);
         title[0][0].Add("Tutorial_Task");
-        title[0].Add(NewScene());
         title[0][1].Add("Tutorial_Task");
 
         List<List<List<string>>> info = NewThings();
         info.Add(NewCharacter());
-        info[0].Add(NewScene());
+        AddNewScene(info[0], 2);
         info[0][0].Add("Just follow the dialogue!");
-        info[0].Add(NewScene());
         info[0][1].Add("Just follow the dialogue!");
 
         List<List<List<List<int>>>> hint = NewHints();
         hint.Add(NewHintsCharacter());
-        hint[0].Add(NewHintsScene());
+        AddNewHintScene(hint[0], 2);
         hint[0][0].Add(new List<int> {});
-        hint[0].Add(NewHintsScene());
         hint[0][1].Add(new List<int> {});
 
         return (title, info, hint);
@@ -32,29 +30,23 @@ public class Hint
     public (List<List<List<string>>>, List<List<List<string>>>, List<List<List<List<int>>>>) Tutorial2() {
         List<List<List<string>>> title = NewThings();
         title.Add(NewCharacter());
-        title[0].Add(NewScene());
+        AddNewScene(title[0], 3);
         title[0][0].Add("Tutorial_Task");
-        title[0].Add(NewScene());
         title[0][1].Add("Tutorial_Task");
-        title[0].Add(NewScene());
         title[0][2].Add("Tutorial_Task");
 
         List<List<List<string>>> info = NewThings();
         info.Add(NewCharacter());
-        info[0].Add(NewScene());
+        AddNewScene(info[0], 3);
         info[0][0].Add("Just follow the dialogue!");
-        info[0].Add(NewScene());
         info[0][1].Add("Just follow the dialogue!");
-        info[0].Add(NewScene());
         info[0][2].Add("Just follow the dialogue!");
 
         List<List<List<List<int>>>> hint = NewHints();
         hint.Add(NewHintsCharacter());
-        hint[0].Add(NewHintsScene());
+        AddNewHintScene(hint[0], 3);
         hint[0][0].Add(new List<int> {});
-        hint[0].Add(NewHintsScene());
         hint[0][1].Add(new List<int> {});
-        hint[0].Add(NewHintsScene());
         hint[0][2].Add(new List<int> {});
 
         return (title, info, hint);
@@ -63,53 +55,35 @@ public class Hint
     public (List<List<List<string>>>, List<List<List<string>>>, List<List<List<List<int>>>>) Tutorial3() {
         List<List<List<string>>> title = NewThings();
         title.Add(NewCharacter());
-        title[0].Add(NewScene());
+        AddNewScene(title[0], 7);
         title[0][0].Add("Tutorial_Task");
-        title[0].Add(NewScene());
         title[0][1].Add("Tutorial_Task");
-        title[0].Add(NewScene());
         title[0][2].Add("Tutorial_Task");
-        title[0].Add(NewScene());
         title[0][3].Add("Tutorial_Task");
-        title[0].Add(NewScene());
         title[0][4].Add("Tutorial_Task");
-        title[0].Add(NewScene());
         title[0][5].Add("Tutorial_Task");
-        title[0].Add(NewScene());
         title[0][6].Add("Tutorial_Task");
 
         List<List<List<string>>> info = NewThings();
         info.Add(NewCharacter());
-        info[0].Add(NewScene());
+        AddNewScene(info[0], 7);
         info[0][0].Add("Just follow the dialogue!");
-        info[0].Add(NewScene());
         info[0][1].Add("Just follow the dialogue!");
-        info[0].Add(NewScene());
         info[0][2].Add("Just follow the dialogue!");
-        info[0].Add(NewScene());
         info[0][3].Add("Just follow the dialogue!");
-        info[0].Add(NewScene());
         info[0][4].Add("Just follow the dialogue!");
-        info[0].Add(NewScene());
         info[0][5].Add("Just follow the dialogue!");
-        info[0].Add(NewScene());
         info[0][6].Add("Just follow the dialogue!");
 
         List<List<List<List<int>>>> hint = NewHints();
         hint.Add(NewHintsCharacter());
-        hint[0].Add(NewHintsScene());
+        AddNewHintScene(hint[0], 7);
         hint[0][0].Add(new List<int> {});
-        hint[0].Add(NewHintsScene());
         hint[0][1].Add(new List<int> {});
-        hint[0].Add(NewHintsScene());
         hint[0][2].Add(new List<int> {});
-        hint[0].Add(NewHintsScene());
         hint[0][3].Add(new List<int> {});
-        hint[0].Add(NewHintsScene());
         hint[0][4].Add(new List<int> {});
-        hint[0].Add(NewHintsScene());
         hint[0][5].Add(new List<int> {});
-        hint[0].Add(NewHintsScene());
         hint[0][6].Add(new List<int> {});
 
         return (title, info, hint);
@@ -118,41 +92,29 @@ public class Hint
     public (List<List<List<string>>>, List<List<List<string>>>, List<List<List<List<int>>>>) Tutorial4() {
         List<List<List<string>>> title = NewThings();
         title.Add(NewCharacter());
-        title[0].Add(NewScene());
+        AddNewScene(title[0], 5);
         title[0][0].Add("Tutorial_Task");
-        title[0].Add(NewScene());
         title[0][1].Add("Tutorial_Task");
-        title[0].Add(NewScene());
         title[0][2].Add("Tutorial_Task");
-        title[0].Add(NewScene());
         title[0][3].Add("Tutorial_Task");
-        title[0].Add(NewScene());
         title[0][4].Add("Tutorial_Task");
 
         List<List<List<string>>> info = NewThings();
         info.Add(NewCharacter());
-        info[0].Add(NewScene());
+        AddNewScene(info[0], 5);
         info[0][0].Add("Just follow the dialogue!");
-        info[0].Add(NewScene());
         info[0][1].Add("Just follow the dialogue!");
-        info[0].Add(NewScene());
         info[0][2].Add("Just follow the dialogue!");
-        info[0].Add(NewScene());
         info[0][3].Add("Just follow the dialogue!");
-        info[0].Add(NewScene());
         info[0][4].Add("Just follow the dialogue!");
 
         List<List<List<List<int>>>> hint = NewHints();
         hint.Add(NewHintsCharacter());
-        hint[0].Add(NewHintsScene());
+        AddNewHintScene(hint[0], 5);
         hint[0][0].Add(new List<int> {});
-        hint[0].Add(NewHintsScene());
         hint[0][1].Add(new List<int> {});
-        hint[0].Add(NewHintsScene());
         hint[0][2].Add(new List<int> {});
-        hint[0].Add(NewHintsScene());
         hint[0][3].Add(new List<int> {});
-        hint[0].Add(NewHintsScene());
         hint[0][4].Add(new List<int> {});
 
         return (title, info, hint);
@@ -161,28 +123,27 @@ public class Hint
     public (List<List<List<string>>>, List<List<List<string>>>, List<List<List<List<int>>>>) Tutorial5() {
         List<List<List<string>>> title = NewThings();
         title.Add(NewCharacter());
-        title[0].Add(NewScene());
+        AddNewScene(title[0], 3);
         title[0][0].Add("Requirement");
-        title[0].Add(NewScene());
         title[0][1].Add("Requirement");
-        title[0].Add(NewScene());
         title[0][1].Add("Requirement");
+        title[0][2].Add("Requirement");
 
         List<List<List<string>>> info = NewThings();
         info.Add(NewCharacter());
-        info[0].Add(NewScene());
-        info[0][0].Add("I need a Gear 2!");
-        info[0].Add(NewScene());
-        info[0][0].Add("The value I need to check is the grape's value!");
+        AddNewScene(info[0], 3);
+        info[0][0].Add("I need a Engine!");
+        info[0][1].Add("I need a Gear 2!");
+        info[0][1].Add("I need a Gear 1!");
+        info[0][2].Add("The value I need to check is the grape's value!");
 
         List<List<List<List<int>>>> hint = NewHints();
         hint.Add(NewHintsCharacter());
-        hint[0].Add(NewHintsScene());
+        AddNewHintScene(hint[0], 3);
         hint[0][0].Add(new List<int> {8});
-        hint[0].Add(NewHintsScene());
         hint[0][1].Add(new List<int> {8});
-        hint[0].Add(NewHintsScene());
-        hint[0][1].Add(new List<int> {1,2,3,8});
+        hint[0][1].Add(new List<int> {8});
+        hint[0][2].Add(new List<int> {1,2,3,8});
 
         return (title, info, hint);
     }
@@ -190,29 +151,23 @@ public class Hint
     public (List<List<List<string>>>, List<List<List<string>>>, List<List<List<List<int>>>>) Registration_Form() {
         List<List<List<string>>> title = NewThings();
         title.Add(NewCharacter());
-        title[0].Add(NewScene());
+        AddNewScene(title[0], 3);
         title[0][0].Add("Hint");
-        title[0].Add(NewScene());
         title[0][1].Add("Hint");
-        title[0].Add(NewScene());
         title[0][2].Add("Hint");
 
         List<List<List<string>>> info = NewThings();
         info.Add(NewCharacter());
-        info[0].Add(NewScene());
+        AddNewScene(info[0], 3);
         info[0][0].Add("Let me give you a hint: I need a variable that contains your name as a value — the required type you should already know!");
-        info[0].Add(NewScene());
         info[0][1].Add("In this game, you can break the If-Else to two If statements! That means you need to submit two concepts: If statement.");
-        info[0].Add(NewScene());
         info[0][2].Add("This time, you don't need to handle break and continue.");
 
         List<List<List<List<int>>>> hint = NewHints();
         hint.Add(NewHintsCharacter());
-        hint[0].Add(NewHintsScene());
+        AddNewHintScene(hint[0], 3);
         hint[0][0].Add(new List<int> {5});
-        hint[0].Add(NewHintsScene());
         hint[0][1].Add(new List<int> {1,2,3,4,7,8});
-        hint[0].Add(NewHintsScene());
         hint[0][2].Add(new List<int> {0,1,2,3,4,7,8,9});
 
         return (title, info, hint);
@@ -221,74 +176,44 @@ public class Hint
     public (List<List<List<string>>>, List<List<List<string>>>, List<List<List<List<int>>>>) GoToSchool() {
         List<List<List<string>>> title = NewThings();
         title.Add(NewCharacter());
-        title[0].Add(NewScene());
+        AddNewScene(title[0], 6);
         title[0][0].Add("SchoolBag!");
-        title[0].Add(NewScene());
         title[0][1].Add("Hint");
-        title[0].Add(NewScene());
         title[0][2].Add("Octopus Card");
-        title[0].Add(NewScene());
         title[0][3].Add("Assignment");
-        title[0].Add(NewScene());
         title[0][4].Add("Score");
-        title[0].Add(NewScene());
         title[0][5].Add("Leave the Bus");
 
         title.Add(NewCharacter());
-        title[1].Add(NewScene());
-        title[1].Add(NewScene());
-        title[1].Add(NewScene());
-        title[1].Add(NewScene());
-        title[1].Add(NewScene());
-        title[1].Add(NewScene());
+        AddNewScene(title[1], 6);
         title[1][5].Add("Leave the Bus");
 
         List<List<List<string>>> info = NewThings();
         info.Add(NewCharacter());
-        info[0].Add(NewScene());
+        AddNewScene(info[0], 6);
         info[0][0].Add("I need the schoolbag!");
-        info[0].Add(NewScene());
         info[0][1].Add("If bus arrives, enter the bus. If not, play mobile games.");
-        info[0].Add(NewScene());
         info[0][2].Add("Where is my octopus card?");
-        info[0].Add(NewScene());
         info[0][3].Add("It should be Math and English.");
-        info[0].Add(NewScene());
         info[0][4].Add("I think it may be 2?");
-        info[0].Add(NewScene());
         info[0][5].Add("Quick! Pack the schoolbag, stand up and run!");
 
         info.Add(NewCharacter());
-        info[1].Add(NewScene());
-        info[1].Add(NewScene());
-        info[1].Add(NewScene());
-        info[1].Add(NewScene());
-        info[1].Add(NewScene());
-        info[1].Add(NewScene());
+        AddNewScene(info[1], 6);
         info[1][5].Add("Quick! Pack the schoolbag, stand up and run!");
 
         List<List<List<List<int>>>> hint = NewHints();
         hint.Add(NewHintsCharacter());
-        hint[0].Add(NewHintsScene());
+        AddNewHintScene(hint[0], 6);
         hint[0][0].Add(new List<int> {8});
-        hint[0].Add(NewHintsScene());
         hint[0][1].Add(new List<int> {1,4,7});
-        hint[0].Add(NewHintsScene());
         hint[0][2].Add(new List<int> {1,2,3,4,7,8});
-        hint[0].Add(NewHintsScene());
         hint[0][3].Add(new List<int> {6,8});
-        hint[0].Add(NewHintsScene());
         hint[0][4].Add(new List<int> {2,3,5,8});
-        hint[0].Add(NewHintsScene());
         hint[0][5].Add(new List<int> {6,7});
 
         hint.Add(NewHintsCharacter());
-        hint[1].Add(NewHintsScene());
-        hint[1].Add(NewHintsScene());
-        hint[1].Add(NewHintsScene());
-        hint[1].Add(NewHintsScene());
-        hint[1].Add(NewHintsScene());
-        hint[1].Add(NewHintsScene());
+        AddNewHintScene(hint[1], 6);
         hint[1][5].Add(new List<int> {6,7});
 
         return (title, info, hint);
@@ -297,116 +222,68 @@ public class Hint
     public (List<List<List<string>>>, List<List<List<string>>>, List<List<List<List<int>>>>) Science_Lesson() {
         List<List<List<string>>> title = NewThings();
         title.Add(NewCharacter());
-        title[0].Add(NewScene());
+        AddNewScene(title[0], 9);
         title[0][0].Add("Just follow!");
-        title[0].Add(NewScene());
         title[0][1].Add("Just follow!");
-        title[0].Add(NewScene());
         title[0][2].Add("Just follow!");
-        title[0].Add(NewScene());
         title[0][3].Add("Just follow!");
-        title[0].Add(NewScene());
         title[0][4].Add("Just follow!");
-        title[0].Add(NewScene());
         title[0][5].Add("Just follow!");
-        title[0].Add(NewScene());
-        title[0].Add(NewScene());
-        title[0].Add(NewScene());
         title[0][8].Add("Just follow!");
 
         title.Add(NewCharacter());
-        title[1].Add(NewScene());
+        AddNewScene(title[1], 9);
         title[1][0].Add("Just follow!");
-        title[1].Add(NewScene());
         title[1][1].Add("Just follow!");
-        title[1].Add(NewScene());
-        title[1].Add(NewScene());
         title[1][3].Add("Just follow!");
-        title[1].Add(NewScene());
         title[1][4].Add("Just follow!");
-        title[1].Add(NewScene());
         title[1][5].Add("Just follow!");
-        title[1].Add(NewScene());
         title[1][6].Add("Just follow!");
-        title[1].Add(NewScene());
         title[1][7].Add("Just follow!");
-        title[1].Add(NewScene());
         title[1][8].Add("Just follow!");
 
         List<List<List<string>>> info = NewThings();
         info.Add(NewCharacter());
-        info[0].Add(NewScene());
+        AddNewScene(info[0], 9);
         info[0][0].Add("Just follow the instruction!");
-        info[0].Add(NewScene());
         info[0][1].Add("Just follow the instruction!");
-        info[0].Add(NewScene());
         info[0][2].Add("Just follow the instruction!");
-        info[0].Add(NewScene());
         info[0][3].Add("Just follow the instruction!");
-        info[0].Add(NewScene());
         info[0][4].Add("Just follow the instruction!");
-        info[0].Add(NewScene());
         info[0][5].Add("Just follow the instruction!");
-        info[0].Add(NewScene());
-        info[0].Add(NewScene());
-        info[0].Add(NewScene());
         info[0][8].Add("Just follow the instruction!");
 
         info.Add(NewCharacter());
-        info[1].Add(NewScene());
+        AddNewScene(info[1], 9);
         info[1][0].Add("Just follow the instruction!");
-        info[1].Add(NewScene());
         info[1][1].Add("Just follow the instruction!");
-        info[1].Add(NewScene());
-        info[1].Add(NewScene());
         info[1][3].Add("Just follow the instruction!");
-        info[1].Add(NewScene());
         info[1][4].Add("Just follow the instruction!");
-        info[1].Add(NewScene());
         info[1][5].Add("Just follow the instruction!");
-        info[1].Add(NewScene());
         info[1][6].Add("Just follow the instruction!");
-        info[1].Add(NewScene());
         info[1][7].Add("Just follow the instruction!");
-        info[1].Add(NewScene());
         info[1][8].Add("Just follow the instruction!");
 
         List<List<List<List<int>>>> hint = NewHints();
         hint.Add(NewHintsCharacter());
-        hint[0].Add(NewHintsScene());
+        AddNewHintScene(hint[0], 9);
         hint[0][0].Add(new List<int> {7});
-        hint[0].Add(NewHintsScene());
         hint[0][1].Add(new List<int> {7});
-        hint[0].Add(NewHintsScene());
         hint[0][2].Add(new List<int> {1,2,3,4,7,8});
-        hint[0].Add(NewHintsScene());
         hint[0][3].Add(new List<int> {0,7,9});
-        hint[0].Add(NewHintsScene());
         hint[0][4].Add(new List<int> {7});
-        hint[0].Add(NewHintsScene());
         hint[0][5].Add(new List<int> {7});
-        hint[0].Add(NewHintsScene());
-        hint[0].Add(NewHintsScene());
-        hint[0].Add(NewHintsScene());
         hint[0][8].Add(new List<int> {7});
 
         hint.Add(NewHintsCharacter());
-        hint[1].Add(NewHintsScene());
+        AddNewHintScene(hint[1], 9);
         hint[1][0].Add(new List<int> {7});
-        hint[1].Add(NewHintsScene());
         hint[1][1].Add(new List<int> {7});
-        hint[1].Add(NewHintsScene());
-        hint[1].Add(NewHintsScene());
         hint[1][3].Add(new List<int> {7});
-        hint[1].Add(NewHintsScene());
         hint[1][4].Add(new List<int> {7});
-        hint[1].Add(NewHintsScene());
         hint[1][5].Add(new List<int> {7});
-        hint[1].Add(NewHintsScene());
         hint[1][6].Add(new List<int> {0,7,9});
-        hint[1].Add(NewHintsScene());
         hint[1][7].Add(new List<int> {1,2,3,4,7,8});
-        hint[1].Add(NewHintsScene());
         hint[1][8].Add(new List<int> {7});
 
         return (title, info, hint);
@@ -415,72 +292,42 @@ public class Hint
     public (List<List<List<string>>>, List<List<List<string>>>, List<List<List<List<int>>>>) Tidy_Up() {
         List<List<List<string>>> title = NewThings();
         title.Add(NewCharacter());
-        title[0].Add(NewScene());
+        AddNewScene(title[0], 6);
         title[0][0].Add("Clean bookshelf");
-        title[0].Add(NewScene());
         title[0][1].Add("Check the book");
-        title[0].Add(NewScene());
-        title[0].Add(NewScene());
         title[0][3].Add("Check food expired date");
-        title[0].Add(NewScene());
-        title[0].Add(NewScene());
         title[0][5].Add("Shopping list");
 
         title.Add(NewCharacter());
-        title[1].Add(NewScene());
-        title[1].Add(NewScene());
-        title[1].Add(NewScene());
+        AddNewScene(title[1], 6);
         title[1][2].Add("Throw the book");
-        title[1].Add(NewScene());
-        title[1].Add(NewScene());
         title[1][4].Add("Check the area");
-        title[1].Add(NewScene());
 
         List<List<List<string>>> info = NewThings();
         info.Add(NewCharacter());
-        info[0].Add(NewScene());
+        AddNewScene(info[0], 6);
         info[0][0].Add("Let me see if the item on bookshelf is dust...");
-        info[0].Add(NewScene());
         info[0][1].Add("Let me see if these 20 books are useful or not...");
-        info[0].Add(NewScene());
-        info[0].Add(NewScene());
         info[0][3].Add("Let me see... throw away the food that is expired, and I can stop when the current food is not expired as the food are placed in order!");
-        info[0].Add(NewScene());
-        info[0].Add(NewScene());
         info[0][5].Add("Let me write down the things that need to be bought in order...");
 
         info.Add(NewCharacter());
-        info[1].Add(NewScene());
-        info[1].Add(NewScene());
-        info[1].Add(NewScene());
+        AddNewScene(info[1], 6);
         info[1][2].Add("Give me the book you don't need in order!");
-        info[1].Add(NewScene());
-        info[1].Add(NewScene());
         info[1][4].Add("Where is it not clean?");
-        info[1].Add(NewScene());
 
         List<List<List<List<int>>>> hint = NewHints();
         hint.Add(NewHintsCharacter());
-        hint[0].Add(NewHintsScene());
+        AddNewHintScene(hint[0], 6);
         hint[0][0].Add(new List<int> {1,2,3,4,7,8});
-        hint[0].Add(NewHintsScene());
         hint[0][1].Add(new List<int> {0,1,2,3,4,7,8,9});
-        hint[0].Add(NewHintsScene());
-        hint[0].Add(NewHintsScene());
         hint[0][3].Add(new List<int> {0,1,2,3,4,7,8,9});
-        hint[0].Add(NewHintsScene());
-        hint[0].Add(NewHintsScene());
         hint[0][5].Add(new List<int> {6,8});
 
         hint.Add(NewHintsCharacter());
-        hint[1].Add(NewHintsScene());
-        hint[1].Add(NewHintsScene());
-        hint[1].Add(NewHintsScene());
+        AddNewHintScene(hint[1], 6);
         hint[1][2].Add(new List<int> {6,8});
-        hint[1].Add(NewHintsScene());
-        hint[1].Add(NewHintsScene());
         hint[1][4].Add(new List<int> {8});
-        hint[1].Add(NewHintsScene());
 
         return (title, info, hint);
     }

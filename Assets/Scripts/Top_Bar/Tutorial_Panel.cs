@@ -7,7 +7,8 @@ using UnityEngine.UI;
 
 public class Tutorial_Panel : MonoBehaviour
 {
-    public Tutorial_Sprite tutorial_slide;
+    public Tutorial_Sprite tutorial_slide;  //tutorial sprite list
+    //all tutorial description
     List<List<string>> tutorial_description = new List<List<string>> {
         new() {
             "Here we will introduce some key features and how you can finish the tasks!",
@@ -52,17 +53,18 @@ public class Tutorial_Panel : MonoBehaviour
         }
     };
 
-    List<string> tutorial_topic = new List<string> {"Gameplay", "Concept Combination", "Detective System", "Task Type", "LeaderBoard"};
-    GameObject image_shown;
+    List<string> tutorial_topic = new List<string> {"Gameplay", "Concept Combination", "Detective System", "Task Type", "LeaderBoard"};  //topic list
+    GameObject image_shown;  //image shown place
 
-    public GameObject check_panel;
-    public TMP_Text item_content;
-    public GameObject tutorial_item;
+    public GameObject check_panel;  //check panel content
+    public TMP_Text item_content;  //slide description
+    public GameObject tutorial_item;  //prefab of check panel item
 
-    int max_slide = 10;
-    int current_slide = 0;
-    int current_topic = 0;
+    int max_slide = 10;  //current tutorial topic maximum slide number
+    int current_slide = 0;  //current slide number
+    int current_topic = 0;  //current topic number
 
+    //Initialize the setting
     void Start()
     {
         image_shown = transform.Find("Image").gameObject;
@@ -73,12 +75,14 @@ public class Tutorial_Panel : MonoBehaviour
         CreateObject();
     }
 
+    //Close the tutorial panel
     public void CloseButtonEvent() {
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(0);
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().UnBlur_Screen();
         Destroy(gameObject);
     }
 
+    //Control to the previous slide
     public void LeftButtonEvent() {
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(3);
         if (current_slide > 0) {
@@ -87,6 +91,7 @@ public class Tutorial_Panel : MonoBehaviour
         }
     }
 
+    //Control to the next slide
     public void RightButtonEvent() {
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(3);
         if (current_slide < max_slide - 1) {
@@ -95,6 +100,7 @@ public class Tutorial_Panel : MonoBehaviour
         }
     }
 
+    //Choose current topic
     public void CheckButtonEvent() {
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(3);
         current_slide = 0;
@@ -102,6 +108,7 @@ public class Tutorial_Panel : MonoBehaviour
         UpdateSlide();
     }
 
+    //Update slide list
     private void UpdateSlide() {
         List<Sprite> slides = null;
         switch (current_topic) {
@@ -125,10 +132,12 @@ public class Tutorial_Panel : MonoBehaviour
         item_content.SetText(tutorial_description[current_topic][current_slide]);
     }
 
+    //Update chosen topic
     public void ChooseObject(int num) {
         current_topic = num;
     }
 
+    //Create check panel items
     public void CreateObject(){
         for (int i = 0; i < tutorial_topic.Count; i++) {
             GameObject item = Instantiate(tutorial_item, check_panel.transform);

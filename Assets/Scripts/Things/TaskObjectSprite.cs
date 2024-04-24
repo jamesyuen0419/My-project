@@ -5,6 +5,7 @@ using UnityEngine;
 
 [Serializable] public class TaskObjectSprite
 {
+    //Storage of all task sprite list
     public List<Sprite> Task1;
     public List<Sprite> Task2;
     public List<Sprite> Task3;

@@ -474,7 +474,7 @@ public class Forge_Panel_System : MonoBehaviour
         }
     }
 
-    //Go the the next page
+    //Go the the previous page
     public void LeftButtonEvent() {
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(3);
         if (currentPage > 0) {
@@ -483,7 +483,7 @@ public class Forge_Panel_System : MonoBehaviour
         }
     }
 
-    //Go to the previous page
+    //Go to the next page
     public void RightButtonEvent() {
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(3);
         if (currentPage < pageLimit - 1) {

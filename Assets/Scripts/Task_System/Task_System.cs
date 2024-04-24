@@ -6,27 +6,28 @@ using TMPro;
 
 public class Task_System : MonoBehaviour
 {
-    public TMP_Text task_content;
-    public GameObject character_panel;
-    public GameObject character_name_item;
-    public GameObject personal_task_panel;
-    public GameObject personal_task_item;
-    public GameObject personal_task_detail_panel;
+    public TMP_Text task_content;  //dialogue content
+    public GameObject character_panel;  //panel for showing character name
+    public GameObject character_name_item;  //prefab of character name object
+    public GameObject personal_task_panel;  //panel for showing task or state
+    public GameObject personal_task_item;  //prefab of task or state item
+    public GameObject personal_task_detail_panel;  //prefab of hint panel
 
-    public UI_Manager ui_script;
+    public UI_Manager ui_script;  //manager script
 
-    public int current_scene;
-    public List<String> dialogue;
-    public List<List<(int, string)>> character_name;
-    int current_character;
-    public List<List<List<string>>> task_title;
-    public List<List<List<string>>> task_info;
-    public List<List<List<List<int>>>> task_hint;
+    public int current_scene;  //current subtask number
+    public List<string> dialogue;  //dialogue content list
+    public List<List<(int, string)>> character_name;  //character name list
+    int current_character;  //clicked character
+    public List<List<List<string>>> task_title;  //task name list
+    public List<List<List<string>>> task_info;  //task information list
+    public List<List<List<List<int>>>> task_hint;  //task hint list
 
-    float speed = 0.03f;
-    IEnumerator coroutine;
-    bool printing = false;
+    float speed = 0.03f;  //printing speed
+    IEnumerator coroutine;  //coroutine object for printing action
+    bool printing = false;  //printing status
 
+    //Initialize the setting
     void Start()
     {
         task_content = transform.Find("DialogueSystem").Find("Scroll View").Find("Viewport").Find("Content").GetComponent<TMP_Text>();
@@ -36,18 +37,20 @@ public class Task_System : MonoBehaviour
         ui_script = GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>();
         current_scene = ui_script.GetSubTaskNum();
         dialogue = ui_script.GetDialogue();
-        character_name =ui_script.GetObjectNames();
+        character_name = ui_script.GetObjectNames();
         (task_title, task_info, task_hint) = ui_script.GetHint();
 
         UpdateName();
         UpdateContent();
     }
 
+    //Direct to next subtask
     public void UpdateScene() {
         current_scene += 1;
         UpdateContent();
     }
 
+    //Create current subtask character name
     void UpdateName() {
         foreach((int num, string name) in character_name[current_scene]) {
             GameObject item = Instantiate(character_name_item, character_panel.transform);
@@ -56,10 +59,12 @@ public class Task_System : MonoBehaviour
         }
     }
 
+    //Update task panel
     public void NameClickEvent((int, string) val) {
         UpdatePersonalTask(character_name[current_scene].IndexOf(val));
     }
 
+    //Create current clicked character task or state
     void UpdatePersonalTask(int num) {
         current_character = num;
         Empty();
@@ -74,12 +79,14 @@ public class Task_System : MonoBehaviour
         }
     }
 
+    //Empty task panel
     private void Empty() {
         foreach (Transform obj in personal_task_panel.transform) {
             Destroy(obj.gameObject);
         }
     }
 
+    //Call the hint panel
     public void TaskItemClickEvent(string value) {
         int task_num = task_title[current_character][current_scene].IndexOf(value);
 
@@ -89,12 +96,14 @@ public class Task_System : MonoBehaviour
         panel.name = panel.name.Replace("(Clone)","").Trim();
         Vector3 center = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         panel.transform.position = new Vector3(center.x,center.y,0);
+        //Upload information to hint panel
         panel.transform.Find("Scroll View").Find("Viewport").Find("Content").Find("Task_Name").GetComponent<TMP_Text>().SetText(task_title[current_character][current_scene][task_num]);
         panel.transform.Find("Scroll View").Find("Viewport").Find("Content").Find("Task_Description").Find("Viewport").Find("Content").GetComponent<TMP_Text>().SetText(task_info[current_character][current_scene][task_num]);
         string hint_content = ProvideHint(task_num);
         panel.transform.Find("Scroll View").Find("Viewport").Find("Content").Find("Hint_Description").Find("Viewport").Find("Content").GetComponent<TMP_Text>().SetText(hint_content);
     }
 
+    //Update dialogue
     public void UpdateContent() {
         if (printing) {
             StopCoroutine(coroutine);
@@ -112,6 +121,7 @@ public class Task_System : MonoBehaviour
         }
     }
 
+    //Printing action
     IEnumerator TypeDia() {
         foreach (char c in dialogue[current_scene]) {
             task_content.text += c;
@@ -120,6 +130,7 @@ public class Task_System : MonoBehaviour
         printing = false;
     }
 
+    //Involved hint convert function
     string ProvideHint(int task_num) {
         string con = "";
         foreach (int num in task_hint[current_character][current_scene][task_num]) {

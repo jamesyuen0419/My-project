@@ -6,25 +6,29 @@ using UnityEngine.SceneManagement;
 
 public class Top_Bar : MonoBehaviour
 {
-    TMP_Text task_name;
+    TMP_Text task_name;  //task name container
 
-    public GameObject tutorial_panel;
+    public GameObject tutorial_panel;  //prefab of tutorial panel
 
+    //Initialize the setting
     void Start()
     {
         task_name = transform.Find("Task_Name").GetComponent<TMP_Text>();
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().SetTaskTopic();
     }
 
+    //Update task name
     public void SetTaskName(string name) {
         task_name.SetText(name);
     }
 
+    //Redirect to task chosen page
     public void CloseButtonEvent() {
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(0);
         SceneManager.LoadScene("TaskChosenScene");
     }
 
+    //Call the tutorial panel
     public void TutorialButtonEvent() {
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(4);
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().Blur_Screen();

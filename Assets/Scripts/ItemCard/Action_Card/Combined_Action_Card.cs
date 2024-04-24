@@ -9,19 +9,21 @@ using UnityEngine.UI;
 public class Combined_Action_Card : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
 
-    public String concept_name;
-    public Concept_Info concept_info;
-    Vector3 fix_vector;
-    public GameObject cardPrefab;
+    public string concept_name;  //concept name
+    public Concept_Info concept_info;  //concept information
+    Vector3 fix_vector;  //vector difference for mouse coordinate system and transform position
+    public GameObject cardPrefab;  //prefab of action card
 
-    public GameObject info_panel;
+    public GameObject info_panel;  //prefab for information panel
 
-    public GameObject name_panel;
+    public GameObject name_panel;  //prefab for name panel
 
+    //Handle the case for name tag generation when the concept name length is out of range
     void OnMouseOver() {
         if (transform.Find("Concept_Name").GetComponent<TMP_Text>().text.Length > 3) {
             if (transform.Find("Concept_Name").GetComponent<TMP_Text>().text.Substring(transform.Find("Concept_Name").GetComponent<TMP_Text>().text.Length - 3, 3) == "...") {
                 if (GameObject.Find("Name_Panel") == null) {
+                    //generate name tag
                     GameObject panel = Instantiate(name_panel, GameObject.FindGameObjectWithTag("Canvas").transform);
                     panel.name = panel.name.Replace("(Clone)","").Trim();
                     panel.transform.Find("Text").GetComponent<TMP_Text>().SetText(concept_info.nickname);
@@ -30,12 +32,15 @@ public class Combined_Action_Card : MonoBehaviour, IPointerDownHandler, IDragHan
                     TMP_Text t_TMP = t.GetComponent<TMP_Text>();
                     ContentSizeFitter tc = t.GetComponent<ContentSizeFitter>();
 
+                    //when name tag too long, resize by using the content size fitter preferred size property
                     if (t_TMP.preferredWidth > 200) {
                         tc.horizontalFit = ContentSizeFitter.FitMode.Unconstrained;
                         tc.verticalFit = ContentSizeFitter.FitMode.Unconstrained;
                         t.GetComponent<RectTransform>().sizeDelta = new Vector2(200, t_TMP.preferredHeight);
                         tc.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
+                        //resize name tag background height
                         panel.GetComponent<RectTransform>().sizeDelta = new Vector2(210, t_TMP.preferredHeight);
+                        //adjust name tag position to bottom left side
                         panel.transform.position = new Vector3(transform.position.x - panel.GetComponent<RectTransform>().sizeDelta.x * 10 / 200, transform.position.y - panel.GetComponent<RectTransform>().sizeDelta.y * 4 / 36 ,transform.position.z);
                     }
                     else {
@@ -47,58 +52,72 @@ public class Combined_Action_Card : MonoBehaviour, IPointerDownHandler, IDragHan
         }
     }
     
-    
+    //End the hover event by deleting the name tag
     void OnMouseExit() {
         if (GameObject.Find("Name_Panel") != null) {
             Destroy(GameObject.Find("Name_Panel").gameObject);
         }
     }
 
+    //Grab process
     public void OnPointerDown(PointerEventData eventData)
     {   
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(0);
+        //create action card clone
         GameObject a = Instantiate(cardPrefab, transform.parent);
         a.name = a.name.Replace("(Clone)","").Trim();
         a.transform.position = transform.position;
+        //replace original action card
         if (GameObject.Find("Forge_Panel") == null) {
             transform.parent.parent.GetComponent<Search_System>().item = a;
         }
         else {
             transform.parent.parent.GetComponent<Search_System_Forge_Panel>().item = a;
         }
+        //copy concept information
         Combined_Action_Card drag = a.GetComponent<Combined_Action_Card>();
         drag.concept_name = concept_name;
         drag.concept_info = concept_info;
-
+        //set the clone parent and calculate position difference
         transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform);
         fix_vector = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        //change hierarchy and disable blocksRaycasts so no collision during dragging to let drop event occured successfully
         transform.SetAsLastSibling();
         GetComponent<CanvasGroup>().blocksRaycasts = false;
     }
 
+    //Check action card process
     public void ShowInfo() {
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(4);
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().Blur_Screen();
+        //generate information panel
         GameObject panel = Instantiate(info_panel, GameObject.FindGameObjectWithTag("Canvas").transform);
         panel.name = panel.name.Replace("(Clone)","").Trim();
         Vector3 center = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         panel.transform.position = new Vector3(center.x,center.y,0);
+        //update action card content
         panel.GetComponent<Info_Panel_System>().UpdateContent(concept_name, concept_info);
     }
 
+    //Continue drag process
     public void OnDrag(PointerEventData eventData)
     {
+        //force name tag follow dragging process
         if (GameObject.Find("Name_Panel") != null) {
             Destroy(GameObject.Find("Name_Panel").gameObject);
         }
+        //compute true position
         transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) - fix_vector;
     }
 
+    //Drop process
     public void OnPointerUp(PointerEventData eventData)
     {
+        //remove name tag
         if (GameObject.Find("Name_Panel") != null) {
             Destroy(GameObject.Find("Name_Panel").gameObject);
         }
+        //enable collision for drop event detection
         GetComponent<CanvasGroup>().blocksRaycasts = true;
         Destroy(gameObject);
     }
