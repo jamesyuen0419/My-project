@@ -78,7 +78,7 @@ public class Search_System : MonoBehaviour
         GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().PlaySound(3);
         if (function_pos < 2) {
             if (function_pos + 1 == 2) {
-                if (ui_script.GetTaskCompleted() > 9) {
+                if (ui_script.GetTask() > 9) {
                     function_pos += 1;
                     ChangeFunctionMode();
                 }

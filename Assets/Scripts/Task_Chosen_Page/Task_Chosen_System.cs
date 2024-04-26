@@ -28,7 +28,7 @@ public class Task_Chosen_System : MonoBehaviour
         if (task_completed == -1) {
             task_completed = GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().GetTaskCompleted();
         }
-
+        
         for (int i = current_head; i < task_total; i++) {
             if (block_created == 6) {
                 break;
