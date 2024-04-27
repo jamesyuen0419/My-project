@@ -453,9 +453,16 @@ public class Hint
         hint.Add(NewHintsCharacter());
         AddNewHintScene(hint[0], 7);
         hint[0][0].Add(new List<int> {8});
+        hint[0][2].Add(new List<int> {6,7,8});
+        hint[0][4].Add(new List<int> {6,7,8});
+        hint[0][5].Add(new List<int> {8});
 
         hint.Add(NewHintsCharacter());
         AddNewHintScene(hint[1], 7);
+        hint[1][1].Add(new List<int> {8});
+        hint[1][2].Add(new List<int> {6,7,8});
+        hint[1][3].Add(new List<int> {6,7,8});
+        hint[1][6].Add(new List<int> {8});
 
         return (title, info, hint);
     }
@@ -779,7 +786,7 @@ public class Hint
 
         hint.Add(NewHintsCharacter());
         AddNewHintScene(hint[4], 1);
-         hint[4][0].Add(new List<int> {7});
+        hint[4][0].Add(new List<int> {7});
 
         return (title, info, hint);
     }

@@ -24,7 +24,7 @@ public class Task_Chosen_System : MonoBehaviour
     private void CreateTaskBlock() {
         Empty();
         int block_created = 0;
-
+        
         if (task_completed == -1) {
             task_completed = GameObject.FindGameObjectWithTag("UI_Manager").GetComponent<UI_Manager>().GetTaskCompleted();
         }
